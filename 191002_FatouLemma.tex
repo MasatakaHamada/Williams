@@ -1,0 +1,42 @@
+\documentclass{jsarticle}
+\usepackage{amsmath, amssymb, amsthm}
+\newtheorem{thm}{定理}
+\newtheorem{cor}{系}
+
+\begin{document}
+$(\Omega,\mathcal{F},P)$を確率空間とする．
+
+\begin{thm}[ファトゥの補題]
+$(\Omega,\mathcal{F},P)$上の非負確率変数列$\{X_n:n\in\mathbb{N}\}$に対して
+次の不等式が成り立つ．
+\[ E\left(\liminf_nX_n\right)\leq\liminf_nE(X_n) \]
+\end{thm}
+
+\begin{cor}
+$\{X_n:n\in\mathbb{N}\}$を$(\Omega,\mathcal{F},P)$上の確率変数列とする．
+このとき，ある可積分確率変数$Y$が存在して，任意の$n\in\mathbb{N}$に対して
+$X_n\geq Y$であるとき，次の不等式が成り立つ．
+\[ E\left(\liminf_nX_n\right)\leq\liminf_nE(X_n) \]
+\end{cor}
+\begin{proof}
+$Z_n=X_n-Y$とおくと，仮定より$\{Z_n:n\in\mathbb{N}\}$は非負確率変数列である．
+よって，ファトゥの補題より
+\begin{equation}\label{byfatou}
+E\left(\liminf_nZ_n\right)\leq\liminf_nE(Z_n)
+\end{equation}
+が成り立つ．ここで
+\begin{align*}
+(\text{(\ref{byfatou})の左辺})
+&=E\left(\liminf_n(X_n-Y)\right)
+=E\left(\liminf_nX_n-Y\right)
+=E\left(\liminf_nX_n\right)-E(Y)，\\
+(\text{(\ref{byfatou})の右辺})
+&=\liminf_nE(X_n-Y)
+=\liminf_n\{E(X_n)-E(Y)\}
+=\liminf_nE(X_n)-E(Y)
+\end{align*}
+であるから，(\ref{byfatou})より
+\[ E\left(\liminf_nX_n\right)\leq\liminf_nE(X_n) \]
+が得られる．
+\end{proof}
+\end{document}
