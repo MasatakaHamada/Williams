@@ -1,0 +1,33 @@
+\documentclass{jsarticle}
+\usepackage{amssymb, amsthm}
+
+\begin{document}
+$p\geq1$と非負劣マルチンゲール$Z=(Z_n)_{n\geq0}$に対して，
+$m\leq n$ならば$\|Z_m\|_p\leq\|Z_n\|_p$が成り立つ．
+
+\begin{proof}
+$c(x)=|x|^p$は$\mathbb{R}$上の凸関数であるから，
+$m\leq n$に対して，条件付き期待値に対するJensenの不等式より
+\[
+E[Z_n^p\mid\mathcal{F}_m]\geq(E[Z_n\mid\mathcal{F}_m])^p
+\]
+が成り立つ．また，$Z$は劣マルチンゲールであり，
+$x\geq0$において$c(x)$は単調非減少であるから
+\[
+(E[Z_n\mid\mathcal{F}_m])^p\geq Z_m^p
+\]
+が成り立つ．よって
+\[
+E[Z_n^p\mid\mathcal{F}_m]\geq Z_m^p
+\]
+となり，両辺の期待値を取ることで
+\[
+E[Z_n^p]\geq E[Z_m^p]
+\]
+を得る．従って
+\[
+\|Z_m\|_p\leq\|Z_n\|_p
+\]
+である．
+\end{proof}
+\end{document}
