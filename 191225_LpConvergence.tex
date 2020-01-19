@@ -1,0 +1,161 @@
+\documentclass{jsarticle}
+\usepackage{amsmath, amssymb, amsthm}
+\newtheorem{thm}{定理}
+
+\begin{document}
+
+以下，$p\geq1$とする．
+
+\begin{thm}\label{有界収束定理}
+確率変数列$(X_n)$が確率変数$X$に確率収束するとする．
+さらに，ある定数$K\in[0,\infty)$が存在して，任意の$n,\omega$に対して
+$|X_n(\omega)|\leq K$が成り立つとする．
+このとき，$X_n$は$X$に$L^p$-収束する．
+\end{thm}
+
+\begin{proof}
+$P(|X|\leq K)=1$であることを確かめよう．
+いま，$k\geq1$に対して
+\[
+|X|>K+k^{-1}
+\Rightarrow|X-X_n|\geq|X|-|X_n|
+>(K+k^{-1})-K=k^{-1}
+\]
+であるから，任意の$n$に対して
+$P(|X|>K+k^{-1})\leq P(|X-X_n|>k^{-1})$
+である．
+ここで，$X_n$は$X$に確率収束するから，この不等式の右辺は0に収束する．
+よって$P(|X|>K+k^{-1})=0$である．
+従って
+\[
+P(|X|>K)=P\left(\bigcup_{k\geq1}\{|X|>K+k^{-1}\}\right)
+\leq\sum_{k\geq1}P(|X|>K+k^{-1})=0
+\]
+ゆえ$P(|X|\leq K)=1$である．
+
+$\varepsilon>0$とする．$\varepsilon$に対して次を満たすような$n_0$をとる．
+\[
+n\geq n_0\Rightarrow P(|X_n-X|>\varepsilon/3)<\left(\frac{\varepsilon}{3K}\right)^p
+\]
+このとき，$n\geq n_0$に対して
+\begin{align*}
+\|X_n-X\|_p
+&=\{E[|X_n-X|^p:|X_n-X|>\varepsilon/3]+E[|X_n-X|^p:|X_n-X|\leq\varepsilon/3]\}^{1/p} \\
+&\leq\{E[|X_n-X|^p:|X_n-X|>\varepsilon/3]+(\varepsilon/3)^p\}^{1/p} \\
+&\leq\{E[(|X_n|+|X|)^p:|X_n-X|>\varepsilon/3]+(\varepsilon/3)^p\}^{1/p} \\
+&\leq\{(2K)^pP(|X_n-X|>\varepsilon/3)+(\varepsilon/3)^p\}^{1/p} \\
+&\leq\{(2K)^p(\varepsilon/3K)^p+(\varepsilon/3)^p\}^{1/p}
+=\{(2\varepsilon/3)^p+(\varepsilon/3)^p\}^{1/p} \\
+&\leq\{(2\varepsilon/3+\varepsilon/3)^p\}^{1/p}=\varepsilon
+\end{align*}
+となる．従って，$X_n$は$X$に$L^p$-収束する．
+\end{proof}
+
+\begin{thm}
+$(X_n)$を$L^p$の元の列，$X\in L^p$とする．
+このとき，$X_n$が$X$に$L^p$-収束するための必要十分条件は
+\begin{enumerate}
+\item$X_n$は$X$に確率収束する，
+\item$(|X_n|^p)$は一様可積分である
+\end{enumerate}
+がともに成り立つことである．
+\end{thm}
+
+\begin{proof}
+1と2がともに満たされているとしよう．
+$K\in[0,\infty)$に対して，関数$\varphi_K\colon\mathbb{R}\to[-K,K]$を次のように定める．
+\[
+\varphi_K(x)=
+\begin{cases}
+-K & (x<-K) \\
+x & (|x|\leq K) \\
+K & (x>K)
+\end{cases}
+\]
+$\varepsilon>0$とする．
+\begin{align*}
+\|\varphi_K(X)-X\|_p
+&=\{E[|K-X|^p:X>K]+E[|-K-X|^p:X<-K]\}^{1/p} \\
+&\leq\{E[(K+|X|)^p:|X|>K]\}^{1/p} \\
+&\leq2\{E[|X|^p:|X|>K]\}^{1/p}
+\end{align*}
+であり，
+13.1(b)より$E[|X|^p:|X|>K_1]<(\varepsilon/6)^p$を満たす$K_1\in[0,\infty)$が存在する．
+同様に
+\[
+\|\varphi_K(X_n)-X_n\|_p\leq2\{E[|X_n|^p:|X_n|>K]\}^{1/p}
+\]
+であり，$(|X_n|^p)$の一様可積分性から，ある$K_2\in[0,\infty)$が存在して，
+任意の$n$に対して$E[|X_n|^p:|X_n|>K_2]<(\varepsilon/6)^p$を満たす．
+そこで，$K=\max\{K_1,K_2\}$とおけば，任意の$n$に対して
+\[
+\|\varphi_K(X)-X\|_p\leq\frac{\varepsilon}{3}，
+\|\varphi_K(X_n)-X_n\|_p\leq\frac{\varepsilon}{3}
+\]
+が成り立つ．
+さらに，$|\varphi_K(x)-\varphi_K(y)|\leq|x-y|$であることに注意すると，
+$X_n$が$X$に確率収束するので，$\varphi_K(X_n)$も$\varphi_K(X)$に確率収束する．
+よって，定理\ref{有界収束定理}より次を満たす$n_0$が存在する．
+\[
+n\geq n_0
+\Rightarrow
+\|\varphi_K(X_n)-\varphi_K(X)\|_p<\frac{\varepsilon}{3}
+\]
+従って，$n\geq n_0$に対して
+\[
+\|X_n-X\|_p
+\leq\|\varphi_K(X)-X\|_p+\|\varphi_K(X_n)-\varphi_K(X)\|_p+\|\varphi_K(X_n)-X_n\|_p
+<\frac{\varepsilon}{3}+\frac{\varepsilon}{3}+\frac{\varepsilon}{3}
+=\varepsilon
+\]
+であり，$X_n$が$X$に$L^p$-収束することがわかる．
+
+逆に，$X_n$が$X$に$L^p$-収束するとしよう．
+$\varepsilon>0$に対して
+\[
+n\geq N\Rightarrow\|X_n-X\|_p<\frac{\varepsilon^{1/p}}{2}
+\]
+となるような$N$を選ぶ．13.1(a)より
+\begin{itemize}
+\item 各$1\leq n\leq N$に対して$P(F)<\delta_n\Rightarrow E(|X_n|^p;F)<\varepsilon$
+\item $P(F)<\delta'\Rightarrow E(|X|^p;F)<\varepsilon/2$
+\end{itemize}
+を満たす$\delta_1,\cdots,\delta_N,\delta'>0$が存在する．
+そこで，$\delta=\min\{\delta_1,\cdots,\delta_N,\delta'\}$とおけば，
+各$1\leq n\leq N$に対して
+\[
+P(F)<\delta\Rightarrow E(|X_n|^p;F)<\varepsilon，
+P(F)<\delta\Rightarrow E(|X|^p;F)<\varepsilon/2^p
+\]
+が成り立つ．
+収束列が有界であることに注意すると，$X_n$が$X$に$L^p$-収束することから，
+$(X_n)$は$L^p$-有界である．よって，$\sup_n\|X_n\|_p<(K\delta)^{1/p}$を満たす$K>0$が存在する．
+このとき
+\[
+P(|X_n|^p>K)=K^{-1}E(K:|X_n|^p>K)
+\leq K^{-1}E(|X_n|^p:|X_n|^p>K)
+\leq K^{-1}\|X_n\|_p^p<\delta
+\]
+であるから，$n\geq N$に対して
+\begin{align*}
+E(|X_n|^p;|X_n|^p>K)
+&=\|X_n1_{\{|X_n|^p>K\}}\|_p^p \\
+&\leq(\|(X_n-X)1_{\{|X_n|^p>K\}}\|_p+\|X1_{\{|X_n|^p>K\}}\|_p)^p \\
+&=(E[|X_n-X|^p:|X_n|^p>K]^{1/p}+E[|X|^p:|X_n|^p>K]^{1/p})^p \\
+&\leq(\|X_n-X\|_p+(\varepsilon/2^p)^{1/p})^p \\
+&\leq(\varepsilon^{1/p}/2+\varepsilon^{1/p}/2)^p=\varepsilon
+\end{align*}
+となる．また，$1\leq n\leq N$に対しても$E(|X_n|^p;|X_n|^p>K)<\varepsilon$である．
+従って，$(|X_n|^p)$は一様可積分である．
+一方
+\[
+P(|X_n-X|>\varepsilon)
+=\frac{E[\varepsilon;|X_n-X|>\varepsilon]}{\varepsilon}
+\leq\frac{E[|X_n-X|;|X_n-X|>\varepsilon]}{\varepsilon}
+\leq\frac{\|X_n-X\|_1}{\varepsilon}
+\leq\frac{\|X_n-X\|_p}{\varepsilon}
+\]
+より，$X_n$が$X$に確率収束することもわかる．
+\end{proof}
+
+\end{document}
