@@ -1,0 +1,45 @@
+\documentclass{jsarticle}
+\usepackage{amsmath,amssymb,amsthm}
+\theoremstyle{definition}
+\newtheorem{lem}{Lemma}
+
+\begin{document}
+% https://math.stackexchange.com/questions/2558790/radon-nikodym-theorem-for-positive-measures-chain-rule/
+\begin{lem}
+$(S,\Sigma,\mu)$を測度空間とし，$f$を$(S,\Sigma)$上の非負可測関数とする．
+また，$(S,\Sigma)$上の測度$\nu$を$\nu(A)=\int_Af\,d\mu,A\in\Sigma$により定める．
+このとき，$(S,\Sigma)$上の任意の非負可測関数$F$に対して次の等式が成り立つ:
+\[ \int_SF\,d\nu=\int_SFf\,d\mu．\]
+\end{lem}
+\begin{proof}
+$F=I_A,A\in\Sigma$のとき
+\[ \int_SF\,d\nu=\int_SI_A\,d\nu=\nu(A)=\int_Af\,d\mu=\int_SI_Af\,d\mu=\int_SFf\,d\mu \]
+であり，等式は成り立つ．$F$が非負単関数であるとき，$F=\sum_{i=1}^na_iI_{A_i}$と書くと，
+積分の線形性より
+\[
+\int_SF\,d\nu=\sum_{i=1}^na_i\int_SI_{A_i}\,d\nu=\sum_{i=1}^na_i\int_SI_{A_i}f\,d\mu
+=\int_SFf\,d\mu
+\]
+であり，等式は成り立つ．ここで，各$n\in\mathbb{N}$に対し，$a^{(n)}\colon[0,\infty]\to[0,n]$を
+\[
+a^{(n)}(x)=\begin{cases}0 & (x=0) \\
+(i-1)2^{-n} & ((i-1)2^{-n}<x\leq i2^{-n}\leq n,i\in\mathbb{N}) \\
+n & (x>n)\end{cases}
+\]
+で定める．$F$が一般の非負可測関数であるとき，$n\in\mathbb{N}$に対し$F_n=a^{(n)}\circ F$とおくと，
+$(F_n)$は$0\leq F_n\uparrow F$を満たす非負単関数列である．よって，単調収束定理より
+\[
+\int_SF\,d\nu=\lim_{n\to\infty}\int_SF_n\,d\nu=\lim_{n\to\infty}\int_SF_nf\,d\mu
+=\int_SFf\,d\mu
+\]
+であり，等式は成り立つ．
+\end{proof}
+\begin{lem}
+$X=\frac{dQ}{dP}$のとき，$P(X>0)=1$ならば$X^{-1}=\frac{dP}{dQ}$である．
+\end{lem}
+\begin{proof}
+任意の$F\in\Sigma$に対して，上記の補題より
+\[ \int_FX^{-1}\,dQ=\int_FX^{-1}X\,dP=\int_FdP=P(F) \]
+が成り立つ．従って$X^{-1}=\frac{dP}{dQ}$である．
+\end{proof}
+\end{document}
